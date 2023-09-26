@@ -1,0 +1,80 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --card-bg: #333;
+  --drag-bg: #444;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  place-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+    --card-bg: #fcfcfc;
+    --drag-bg: #fff;
+  }
+}
+
+#card {
+  background: var(--card-bg);
+  width: 80%;
+  height: 80vh;
+  max-width: 400px;
+  max-height: 300px;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.draggable {
+  --offset-x: 0px;
+  --offset-y: 0px;
+
+  background: var(--drag-bg);
+  border-radius: 10px;
+  cursor: grab;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 50%;
+  top: 50%;
+  transform: translate(
+    calc(var(--offset-x) - 50%),
+    calc(var(--offset-y) - 50%)
+  );
+}
+.draggable.transition {
+  transition: all 0.4s ease-out;
+}
+
+.draggable:active {
+  cursor: grabbing;
+  border: 1.2px solid rgba(100, 100, 100, 0.6);
+  box-shadow: 0 0 0 3px rgba(100, 100, 100, 0.3);
+}

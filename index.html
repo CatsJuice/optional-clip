@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Optional Clip</title>
+  <script type="module" src="/src/index.ts"></script>
+  <link rel="stylesheet" href="/src/index.css" />
+</head>
+
+<body>
+  <div id="card">
+    <optional-clip y>
+      <div class="draggable" draggable></div>
+    </optional-clip>
+  </div>
+
+
+  <script>
+    const draggable = document.querySelector('.draggable');
+
+    let offset = { x: 0, y: 0 }
+    let startPos = { x: 0, y: 0 }
+
+    draggable.addEventListener('mousedown', onMouseDown)
+
+    function onMouseDown(e) {
+      onDragStart({ x: e.clientX, y: e.clientY })
+    }
+    function onMouseMove(e) {
+      onDrag({ x: e.clientX, y: e.clientY })
+    }
+    function onMouseUp(e) {
+      onDragEnd({ x: e.clientX, y: e.clientY })
+    }
+
+    function onDragStart(e) {
+      startPos = { x: e.x + offset.x, y: e.y + offset.y }
+      window.addEventListener('mousemove', onMouseMove)
+      window.addEventListener('mouseup', onMouseUp)
+    }
+    function onDrag(e) {
+      offset.x = e.x - startPos.x;
+      offset.y = e.y - startPos.y;
+      draggable.style.setProperty('--offset-x', `${offset.x}px`)
+      draggable.style.setProperty('--offset-y', `${offset.y}px`)
+    }
+    function onDragEnd(e) {
+      startPos = { ...e }
+      window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('mouseup', onMouseUp)
+      offset = { x: 0, y: 0 }
+      draggable.classList.toggle('transition', true)
+      draggable.style.setProperty('--offset-x', `${offset.x}px`)
+      draggable.style.setProperty('--offset-y', `${offset.y}px`)
+      draggable.addEventListener('transitionend', () => {
+        draggable.classList.toggle('transition', false)
+      }, { once: true })
+    }
+  </script>
+</body>
+
+</html>
