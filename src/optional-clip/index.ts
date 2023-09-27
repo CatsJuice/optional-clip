@@ -1,6 +1,6 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { styleMap } from "lit/directives/style-map.js";
+import { styleMap } from 'lit/directives/style-map.js';
 
 @customElement("optional-clip")
 export class OptionalClip extends LitElement {
@@ -41,7 +41,7 @@ export class OptionalClip extends LitElement {
     return this.bottom ?? this.y ?? false;
   }
 
-  get clipStyle() {
+  get clipStyle(): any {
     const { clipLeft, clipRight, clipTop, clipBottom } = this;
     const distance = "100000px";
     return styleMap({

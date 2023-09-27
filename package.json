@@ -1,19 +1,31 @@
 {
   "name": "optional-clip",
-  "private": true,
   "version": "0.0.1",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/optional-clip.js"
+    }
+  },
+  "main": "./dist/optional-clip.js",
+  "module": "./dist/optional-clip.js",
+  "types": "./dist/types/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc && vite build",
+    "preview": "vite preview",
+    "publish": "npm run build && npm publish --registry https://registry.npmjs.org"
   },
   "dependencies": {
     "lit": "^2.7.6"
   },
   "devDependencies": {
     "bumpp": "^9.2.0",
+    "rimraf": "^5.0.4",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vite-plugin-dts": "^3.6.0"
   }
 }
