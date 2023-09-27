@@ -12,6 +12,7 @@
     "lit": "^2.7.6"
   },
   "devDependencies": {
+    "bumpp": "^9.2.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
   }
